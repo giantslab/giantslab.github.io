@@ -152,17 +152,27 @@
       align-items: flex-start;
     }
   }
+    .card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-link .card {
+  cursor: pointer;
+}
   </style>
 </head>
 <body>
   <div class="container">
 
-    <div class="card">
-      <h1>Joohan Nam</h1>
-      <p class="subtitle">GIANTS | Geometry-Informed Advances in Nano-Tunable Solids</p>
-      <p class="role">Materials Scientist, Reticular Chemist
-      </p>
-    </div>
+<a class="card-link" href="giants.html">
+  <div class="card">
+    <h1>Joohan Nam</h1>
+    <p class="subtitle">GIANTS | Geometry-Informed Advances in Nano-Tunable Solids</p>
+    <p>Materials Scientist, Reticular Chemist</p>
+  </div>
+</a>
 
     <div class="card">
       <h2>Affiliation & Contact</h2>
