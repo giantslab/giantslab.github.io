@@ -87,6 +87,55 @@
       font-size: 0.95rem;
       line-height: 1.5;
     }
+
+      .publication {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .pub-main {
+    flex: 1;
+  }
+
+  .pub-title {
+    font-weight: 600;
+    margin: 0 0 6px 0;
+    color: #222;
+  }
+
+  .pub-ref {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .pub-button {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: #1a73e8;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .pub-button:hover {
+    background: #1558b0;
+    text-decoration: none;
+  }
+
+  @media (max-width: 700px) {
+    .publication {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
   </style>
 </head>
 <body>
@@ -117,29 +166,41 @@
       <span class="tag">Mechanical Metamaterials</span>
     </div>
 
-    <div class="card">
-       <h2>Selected Publications</h2>
+<div class="card">
+  <h2>Selected Publications</h2>
 
-       <div class="publication">
-         <p class="pub-title">Fluidic Actuation in a 2D-Connected Metal-Organic Framework</p>
-         <p class="pub-ref">Jin, E.†; Nam, J.†; Choe, W.* et al. <em>ChemRxiv</em> <strong>2025</strong>.</p>
-       </div>
+  <div class="publication">
+    <div class="pub-main">
+      <p class="pub-title">Fluidic Actuation in a 2D-Connected Metal–Organic Framework</p>
+      <p class="pub-ref">Jin, E.<sup>†</sup>; Nam, J.<sup>†</sup>; Choe, W.* et al. <em>ChemRxiv</em> <strong>2025</strong>.</p>
+    </div>
+    <a class="pub-button" href="여기에_논문링크_입력" target="_blank" rel="noopener noreferrer">LINK</a>
+  </div>
 
-       <div class="publication">
-         <p class="pub-title">High-Entropy Zeolitic Imidazolate Frameworks for Dynamic Hydrogen Isotope Separation</p>
-         <p class="pub-ref">Nam, J.; Choe, W.* et al. <em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202420379.</p>
-       </div>
-      
-       <div class="publication">
-         <p class="pub-title">Pore Structure Modulation in Kirigamic Zeolitic Imidazolate Framework</p>
-         <p class="pub-ref">Nam, J.; Choe, W.* et al. <em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202417137.</p>
-       </div>
-      
-       <div class="publication">
-         <p class="pub-title">Zeolitic Imidazolate Frameworks as Solid-State Nanomachines</p>
-         <p class="pub-ref">Nam, J.; Choe, W.* et al. <em>Angew. Chem. Int. Ed.</em> <strong>2024</strong>, <em>63</em>, e202404061.</p>
-       </div>
-     </div>
+  <div class="publication">
+    <div class="pub-main">
+      <p class="pub-title">High-Entropy Zeolitic Imidazolate Frameworks for Dynamic Hydrogen Isotope Separation</p>
+      <p class="pub-ref">Nam, J.; Choe, W.* et al. <em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202420379.</p>
+    </div>
+    <a class="pub-button" href="여기에_논문링크_입력" target="_blank" rel="noopener noreferrer">LINK</a>
+  </div>
+
+  <div class="publication">
+    <div class="pub-main">
+      <p class="pub-title">Pore Structure Modulation in Kirigamic Zeolitic Imidazolate Framework</p>
+      <p class="pub-ref">Nam, J.; Choe, W.* et al. <em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202417137.</p>
+    </div>
+    <a class="pub-button" href="여기에_논문링크_입력" target="_blank" rel="noopener noreferrer">LINK</a>
+  </div>
+
+  <div class="publication">
+    <div class="pub-main">
+      <p class="pub-title">Zeolitic Imidazolate Frameworks as Solid-State Nanomachines</p>
+      <p class="pub-ref">Nam, J.; Choe, W.* et al. <em>Angew. Chem. Int. Ed.</em> <strong>2024</strong>, <em>63</em>, e202404061.</p>
+    </div>
+    <a class="pub-button" href="여기에_논문링크_입력" target="_blank" rel="noopener noreferrer">LINK</a>
+  </div>
+</div>
 
    <div class="card">
      <h2>Links</h2>
