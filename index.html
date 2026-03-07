@@ -168,6 +168,50 @@
 .profile-section h2 {
   margin-bottom: 16px;
 }
+    .profile-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.profile-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-image-wrap {
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.profile-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  border-radius: 20px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+}
+
+.profile-section {
+  margin-top: 36px;
+}
+
+.profile-section h2 {
+  margin-bottom: 16px;
+}
+
+@media (max-width: 800px) {
+  .profile-card {
+    flex-direction: column;
+  }
+
+  .profile-image-wrap {
+    width: 180px;
+    align-self: center;
+  }
+}
   </style>
 </head>
 <body>
