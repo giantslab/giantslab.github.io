@@ -159,6 +159,56 @@
         font-size: 1.08rem;
       }
     }
+    .pub-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.pub-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: #1a73e8;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.badge-journal {
+  background: #eaf2ff;
+  color: #1a73e8;
+}
+
+.badge-year {
+  background: #eef1f6;
+  color: #4b5563;
+}
+
+.badge-role-first {
+  background: #e9f8ef;
+  color: #1f7a43;
+}
+
+.badge-role-co {
+  background: #fff3e8;
+  color: #b86418;
+}
   </style>
 </head>
 <body>
@@ -173,69 +223,99 @@
       </p>
     </div>
 
-    <div class="pub-list">
+<div class="pub-list">
 
-      <div class="pub-item">
-        <div class="pub-meta">
-          <span class="badge badge-journal">ChemRxiv</span>
-          <span class="badge badge-year">2025</span>
-        </div>
-        <p class="pub-title">Fluidic Actuation in a 2D-Connected Metal–Organic Framework</p>
-        <p class="pub-ref">Jin, E.<sup>†</sup>; Nam, J.<sup>†</sup>; Choe, W.* et al. <em>ChemRxiv</em> <strong>2025</strong>.</p>
-        <div class="pub-actions">
-          <a class="pub-button" href="여기에_프리프린트_링크" target="_blank" rel="noopener noreferrer">
-            <span>Link</span>
-            <span>&gt;</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="pub-item">
-        <div class="pub-meta">
-          <span class="badge badge-journal">Angew. Chem. Int. Ed.</span>
-          <span class="badge badge-year">2025</span>
-        </div>
-        <p class="pub-title">High-Entropy Zeolitic Imidazolate Frameworks for Dynamic Hydrogen Isotope Separation</p>
-        <p class="pub-ref">Nam, J.; Choe, W.* et al. <em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202420379.</p>
-        <div class="pub-actions">
-          <a class="pub-button" href="여기에_논문링크" target="_blank" rel="noopener noreferrer">
-            <span>Link</span>
-            <span>&gt;</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="pub-item">
-        <div class="pub-meta">
-          <span class="badge badge-journal">Angew. Chem. Int. Ed.</span>
-          <span class="badge badge-year">2025</span>
-        </div>
-        <p class="pub-title">Pore Structure Modulation in Kirigamic Zeolitic Imidazolate Framework</p>
-        <p class="pub-ref">Nam, J.; Choe, W.* et al. <em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202417137.</p>
-        <div class="pub-actions">
-          <a class="pub-button" href="여기에_논문링크" target="_blank" rel="noopener noreferrer">
-            <span>Link</span>
-            <span>&gt;</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="pub-item">
-        <div class="pub-meta">
-          <span class="badge badge-journal">Angew. Chem. Int. Ed.</span>
-          <span class="badge badge-year">2024</span>
-        </div>
-        <p class="pub-title">Zeolitic Imidazolate Frameworks as Solid-State Nanomachines</p>
-        <p class="pub-ref">Nam, J.; Choe, W.* et al. <em>Angew. Chem. Int. Ed.</em> <strong>2024</strong>, <em>63</em>, e202404061.</p>
-        <div class="pub-actions">
-          <a class="pub-button" href="여기에_논문링크" target="_blank" rel="noopener noreferrer">
-            <span>Link</span>
-            <span>&gt;</span>
-          </a>
-        </div>
-      </div>
-
+  <div class="pub-item">
+    <div class="pub-meta">
+      <span class="pub-number">5</span>
+      <span class="badge badge-journal">Journal Name</span>
+      <span class="badge badge-year">2026</span>
+      <span class="badge badge-role-co">Co-author</span>
     </div>
+    <p class="pub-title">Title of the 2026 Publication</p>
+    <p class="pub-authors">Author A.; Author B.; Nam, J.; Author D.*; Author E.; Author F.</p>
+    <p class="pub-citation"><em>Journal Name</em> <strong>2026</strong>, <em>xx</em>, xxx–xxx.</p>
+    <div class="pub-actions">
+      <a class="pub-button" href="여기에_논문링크" target="_blank" rel="noopener noreferrer">
+        <span>Link</span>
+        <span>&gt;</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="pub-item">
+    <div class="pub-meta">
+      <span class="pub-number">4</span>
+      <span class="badge badge-journal">ChemRxiv</span>
+      <span class="badge badge-year">2025</span>
+      <span class="badge badge-role-first">First Author</span>
+    </div>
+    <p class="pub-title">Fluidic Actuation in a 2D-Connected Metal–Organic Framework</p>
+    <p class="pub-authors">Jin, E.<sup>†</sup>; Nam, J.<sup>†</sup>; Choe, W.* et al.</p>
+    <p class="pub-citation"><em>ChemRxiv</em> <strong>2025</strong>.</p>
+    <div class="pub-actions">
+      <a class="pub-button" href="여기에_프리프린트_링크" target="_blank" rel="noopener noreferrer">
+        <span>Link</span>
+        <span>&gt;</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="pub-item">
+    <div class="pub-meta">
+      <span class="pub-number">3</span>
+      <span class="badge badge-journal">Angew. Chem. Int. Ed.</span>
+      <span class="badge badge-year">2025</span>
+      <span class="badge badge-role-first">First Author</span>
+    </div>
+    <p class="pub-title">High-Entropy Zeolitic Imidazolate Frameworks for Dynamic Hydrogen Isotope Separation</p>
+    <p class="pub-authors">Nam, J.; Choe, W.* et al.</p>
+    <p class="pub-citation"><em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202420379.</p>
+    <div class="pub-actions">
+      <a class="pub-button" href="여기에_논문링크" target="_blank" rel="noopener noreferrer">
+        <span>Link</span>
+        <span>&gt;</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="pub-item">
+    <div class="pub-meta">
+      <span class="pub-number">2</span>
+      <span class="badge badge-journal">Angew. Chem. Int. Ed.</span>
+      <span class="badge badge-year">2025</span>
+      <span class="badge badge-role-first">First Author</span>
+    </div>
+    <p class="pub-title">Pore Structure Modulation in Kirigamic Zeolitic Imidazolate Framework</p>
+    <p class="pub-authors">Nam, J.; Choe, W.* et al.</p>
+    <p class="pub-citation"><em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202417137.</p>
+    <div class="pub-actions">
+      <a class="pub-button" href="여기에_논문링크" target="_blank" rel="noopener noreferrer">
+        <span>Link</span>
+        <span>&gt;</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="pub-item">
+    <div class="pub-meta">
+      <span class="pub-number">1</span>
+      <span class="badge badge-journal">Angew. Chem. Int. Ed.</span>
+      <span class="badge badge-year">2024</span>
+      <span class="badge badge-role-first">First Author</span>
+    </div>
+    <p class="pub-title">Zeolitic Imidazolate Frameworks as Solid-State Nanomachines</p>
+    <p class="pub-authors">Nam, J.; Choe, W.* et al.</p>
+    <p class="pub-citation"><em>Angew. Chem. Int. Ed.</em> <strong>2024</strong>, <em>63</em>, e202404061.</p>
+    <div class="pub-actions">
+      <a class="pub-button" href="여기에_논문링크" target="_blank" rel="noopener noreferrer">
+        <span>Link</span>
+        <span>&gt;</span>
+      </a>
+    </div>
+  </div>
+
+</div>
   </div>
 </body>
 </html>
