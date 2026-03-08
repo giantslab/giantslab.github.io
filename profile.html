@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile | Joohan Nam</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6fb;
+      color: #1f2937;
+      line-height: 1.7;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e5e7eb;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .site-logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #1a73e8;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .site-nav {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .site-nav a {
+      color: #374151;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .site-nav a:hover,
+    .site-nav a.active {
+      color: #1a73e8;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 36px 20px 70px;
+    }
+
+    .profile-hero {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 34px;
+      background: white;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      margin-bottom: 26px;
+    }
+
+    .profile-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+      background: #eef2f7;
+    }
+
+    .profile-main h1 {
+      margin: 0 0 16px 0;
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .mini-title {
+      margin: 0 0 8px 0;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .id-block,
+    .timeline-block {
+      margin-bottom: 26px;
+    }
+
+    .id-line,
+    .timeline-line,
+    .contact-line {
+      margin: 4px 0;
+      font-size: 1.02rem;
+    }
+
+    .id-line a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+
+    .id-line a:hover {
+      text-decoration: underline;
+    }
+
+    .timeline-item {
+      margin-bottom: 26px;
+    }
+
+    .timeline-head {
+      margin: 0 0 4px 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .timeline-sub {
+      margin: 0;
+      font-size: 1rem;
+      color: #374151;
+    }
+
+    .section-card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      margin-bottom: 22px;
+    }
+
+    .section-card h2 {
+      margin: 0 0 18px 0;
+      font-size: 1.7rem;
+      color: #111827;
+    }
+
+    .award-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .award-item {
+      padding: 16px 18px;
+      border: 1px solid #e5e7eb;
+      border-left: 5px solid #1a73e8;
+      border-radius: 12px;
+      background: #fbfcff;
+    }
+
+    .award-title {
+      margin: 0 0 4px 0;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .award-meta {
+      margin: 0;
+      color: #4b5563;
+      font-size: 0.98rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .contact-box {
+      padding: 18px 20px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #fbfcff;
+    }
+
+    .contact-box h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.1rem;
+    }
+
+    .contact-box p,
+    .contact-box a {
+      margin: 0;
+      color: #374151;
+      text-decoration: none;
+    }
+
+    .contact-box a:hover {
+      text-decoration: underline;
+      color: #1a73e8;
+    }
+
+    @media (max-width: 900px) {
+      .profile-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-photo-wrap {
+        max-width: 240px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px 20px;
+      }
+
+      .site-nav {
+        gap: 16px;
+      }
+
+      .site-logo {
+        font-size: 1.4rem;
+      }
+
+      .profile-main h1 {
+        font-size: 2.2rem;
+      }
+
+      .container {
+        padding: 28px 16px 60px;
+      }
+
+      .profile-hero,
+      .section-card {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-logo" href="index.html">GIANTS Lab</a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="profile.html" class="active">Profile</a>
+        <a href="giants.html">Research</a>
+        <a href="publications.html">Publications</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="profile-hero">
+      <div class="profile-photo-wrap">
+        <img src="joohan-photo.jpg" alt="Portrait of Joohan Nam" class="profile-photo">
+      </div>
+
+      <div class="profile-main">
+        <h1>Joohan Nam</h1>
+
+        <div class="id-block">
+          <p class="mini-title">Researcher IDs</p>
+          <p class="id-line">
+            ORCID:
+            <a href="https://orcid.org/0000-0001-5123-418X" target="_blank" rel="noopener noreferrer">
+              0000-0001-5123-418X
+            </a>
+          </p>
+          <p class="id-line">
+            Google Scholar:
+            <a href="https://scholar.google.co.th/citations?hl=en&user=6bQ5HG8AAAAJ" target="_blank" rel="noopener noreferrer">
+              Scholar Profile
+            </a>
+          </p>
+        </div>
+
+        <div class="timeline-block">
+          <div class="timeline-item">
+            <p class="timeline-head">2025.03– | Postdoctoral Fellow, Ulsan National Institute of Science and Technology (UNIST)</p>
+            <p class="timeline-sub">Advisor: Professor Wonyoung Choe</p>
+          </div>
+
+          <div class="timeline-item">
+            <p class="timeline-head">2025.10–2025.12 | Visiting Postdoctoral Fellow, Technical University of Dresden (TU Dresden)</p>
+            <p class="timeline-sub">Advisor: Professor Stefan Kaskel</p>
+          </div>
+
+          <div class="timeline-item">
+            <p class="timeline-head">2019.02–2025.02 | M.S.–Ph.D., UNIST</p>
+            <p class="timeline-sub">Department of Chemistry (School of Natural Science)</p>
+            <p class="timeline-sub">Thesis title: <em>Zeolitic Imidazolate Frameworks as Mechanical Metamaterials and for Hydrogen Isotope Separation</em></p>
+            <p class="timeline-sub">Advisor: Professor Wonyoung Choe</p>
+          </div>
+
+          <div class="timeline-item">
+            <p class="timeline-head">2015.03–2019.02 | B.S., UNIST</p>
+            <p class="timeline-sub">Multi-disciplinary Major of Chemistry (School of Natural Science) and Chemical Engineering (School of Energy and Chemical Engineering)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>Awards & Honors</h2>
+      <div class="award-list">
+        <div class="award-item">
+          <p class="award-title">[Award Name 1]</p>
+          <p class="award-meta">[Year] · [Organization / Society]</p>
+        </div>
+
+        <div class="award-item">
+          <p class="award-title">[Award Name 2]</p>
+          <p class="award-meta">[Year] · [Organization / Society]</p>
+        </div>
+
+        <div class="award-item">
+          <p class="award-title">[Award Name 3]</p>
+          <p class="award-meta">[Year] · [Organization / Society]</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>Contact</h2>
+      <div class="contact-grid">
+        <div class="contact-box">
+          <h3>Email</h3>
+          <p>joohan@unist.ac.kr</p>
+          <p>nnam.zw@gmail.com</p>
+        </div>
+
+        <div class="contact-box">
+          <h3>Affiliation</h3>
+          <p>Postdoctoral Fellow</p>
+          <p>Ulsan National Institute of Science and Technology (UNIST)</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
