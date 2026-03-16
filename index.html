@@ -328,6 +328,173 @@
     font-size: 1.4rem;
   }
 }
+    .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+.section-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.section-link:hover {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.section-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1.5px solid #1a73e8;
+  border-radius: 4px;
+  background: white;
+  color: #1a73e8;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.section-button:hover {
+  background: #eef5ff;
+  text-decoration: none;
+}
+
+.pub-carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 48px) / 3);
+  gap: 24px;
+  overflow-x: auto;
+  padding: 4px 4px 12px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #c7d2e3 transparent;
+}
+
+.pub-carousel::-webkit-scrollbar {
+  height: 10px;
+}
+
+.pub-carousel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pub-carousel::-webkit-scrollbar-thumb {
+  background: #c7d2e3;
+  border-radius: 999px;
+}
+
+.pub-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  scroll-snap-align: start;
+}
+
+.pub-card-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.pub-card-vertical {
+  height: 100%;
+  min-height: 460px;
+  background: linear-gradient(to bottom, #ffffff, #fcfdff);
+  border: 1px solid #e5eaf3;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.pub-card-link:hover .pub-card-vertical {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.10);
+}
+
+.pub-card-image-wrap {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: #f3f5f9;
+  overflow: hidden;
+}
+
+.pub-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.pub-card-link:hover .pub-card-image {
+  transform: scale(1.03);
+}
+
+.pub-card-body {
+  padding: 18px 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pub-card-title {
+  margin: 0;
+  font-size: 1.03rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #111827;
+  text-decoration: none;
+}
+
+.pub-card-ref {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #5b6472;
+  text-decoration: none;
+}
+
+.pub-card-link:hover .pub-card-title,
+.pub-card-link:hover .pub-card-ref {
+  text-decoration: none;
+}
+
+@media (max-width: 1100px) {
+  .pub-carousel {
+    grid-auto-columns: calc((100% - 24px) / 2);
+  }
+}
+
+@media (max-width: 700px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pub-carousel {
+    grid-auto-columns: 85%;
+  }
+
+  .pub-card-vertical {
+    min-height: 420px;
+  }
+}
   </style>
 </head>
 <body>
@@ -393,58 +560,58 @@
     <a class="section-button" href="publications.html">View Full List &gt;</a>
   </div>
 
-  <div class="publication">
-    <div class="pub-main">
-      <p class="pub-title">Fluidic Actuation in a 2D Metal–Organic Framework</p>
-      <p class="pub-ref">Jin, E.<sup>†</sup>; Nam, J.<sup>†</sup>; Choe, W.* et al. <em>ChemRxiv</em> <strong>2025</strong>.</p>
-    </div>
-    <a class="pub-button" href="https://doi.org/10.26434/chemrxiv-2025-4dtb2" target="_blank" rel="noopener noreferrer">
-  <span>Link</span>
-  <span class="pub-button-arrow">&gt;</span>
-</a>
-  </div>
+  <div class="pub-carousel">
 
-  <div class="publication">
-    <div class="pub-main">
-      <p class="pub-title">High-Entropy Zeolitic Imidazolate Frameworks for Dynamic Hydrogen Isotope Separation</p>
-      <p class="pub-ref">Nam, J.; Choe, W.* et al. <em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202420379.</p>
-    </div>
-    <a class="pub-button" href="https://doi.org/10.1002/anie.202420379" target="_blank" rel="noopener noreferrer">
-  <span>Link</span>
-  <span class="pub-button-arrow">&gt;</span>
-</a>
-  </div>
+    <a class="pub-card-link" href="https://doi.org/10.1002/anie.202420379" target="_blank" rel="noopener noreferrer">
+      <article class="pub-card-vertical">
+        <div class="pub-card-image-wrap">
+          <img src="pub-he-zif.jpg" alt="High-Entropy ZIF publication image" class="pub-card-image">
+        </div>
+        <div class="pub-card-body">
+          <p class="pub-card-title">High-Entropy Zeolitic Imidazolate Frameworks for Dynamic Hydrogen Isotope Separation</p>
+          <p class="pub-card-ref"><em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202420379.</p>
+        </div>
+      </article>
+    </a>
 
-  <div class="publication">
-    <div class="pub-main">
-      <p class="pub-title">Pore Structure Modulation in Kirigamic Zeolitic Imidazolate Framework</p>
-      <p class="pub-ref">Nam, J.; Choe, W.* et al. <em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202417137.</p>
-    </div>
-    <a class="pub-button" href="https://doi.org/10.1002/anie.202417137" target="_blank" rel="noopener noreferrer">
-  <span>Link</span>
-  <span class="pub-button-arrow">&gt;</span>
-</a>
-  </div>
+    <a class="pub-card-link" href="https://doi.org/10.1002/anie.202417137" target="_blank" rel="noopener noreferrer">
+      <article class="pub-card-vertical">
+        <div class="pub-card-image-wrap">
+          <img src="pub-kirigami-zif.jpg" alt="Kirigamic ZIF publication image" class="pub-card-image">
+        </div>
+        <div class="pub-card-body">
+          <p class="pub-card-title">Pore Structure Modulation in Kirigamic Zeolitic Imidazolate Framework</p>
+          <p class="pub-card-ref"><em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202417137.</p>
+        </div>
+      </article>
+    </a>
 
-  <div class="publication">
-    <div class="pub-main">
-      <p class="pub-title">Zeolitic Imidazolate Frameworks as Solid-State Nanomachines</p>
-      <p class="pub-ref">Nam, J.; Choe, W.* et al. <em>Angew. Chem. Int. Ed.</em> <strong>2024</strong>, <em>63</em>, e202404061.</p>
-    </div>
-    <a class="pub-button" href="https://doi.org/10.1002/anie.202404061" target="_blank" rel="noopener noreferrer">
-  <span>Link</span>
-  <span class="pub-button-arrow">&gt;</span>
-</a>
+    <a class="pub-card-link" href="https://doi.org/10.1002/anie.202404061" target="_blank" rel="noopener noreferrer">
+      <article class="pub-card-vertical">
+        <div class="pub-card-image-wrap">
+          <img src="pub-nanomachine-zif.jpg" alt="Nanomachine ZIF publication image" class="pub-card-image">
+        </div>
+        <div class="pub-card-body">
+          <p class="pub-card-title">Zeolitic Imidazolate Frameworks as Solid-State Nanomachines</p>
+          <p class="pub-card-ref"><em>Angew. Chem. Int. Ed.</em> <strong>2024</strong>, <em>63</em>, e202404061.</p>
+        </div>
+      </article>
+    </a>
+
+    <a class="pub-card-link" href="https://doi.org/10.26434/chemrxiv-2025-4dtb2" target="_blank" rel="noopener noreferrer">
+      <article class="pub-card-vertical">
+        <div class="pub-card-image-wrap">
+          <img src="pub-fluidic-actuation.jpg" alt="Fluidic actuation publication image" class="pub-card-image">
+        </div>
+        <div class="pub-card-body">
+          <p class="pub-card-title">Fluidic Actuation in a 2D Metal–Organic Framework</p>
+          <p class="pub-card-ref"><em>ChemRxiv</em> <strong>2025</strong>, 10.26434/chemrxiv-2025-4dtb2.</p>
+        </div>
+      </article>
+    </a>
+
   </div>
 </div>
-
-   <div class="card">
-     <h2>Links</h2>
-     <ul>
-       <li><a href="https://orcid.org/0000-0001-5123-418X" target="_blank">ORCID iD</a></li>
-       <li><a href="https://scholar.google.co.th/citations?hl=en&user=6bQ5HG8AAAAJ" target="_blank">Google Scholar Profile</a></li>
-     </ul>
-  </div>
 
     <div class="footer">
       © 2026 Joohan Nam
