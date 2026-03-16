@@ -96,57 +96,6 @@
       line-height: 1.5;
     }
 
-      .publication {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-    margin-bottom: 24px;
-  }
-
-  .pub-main {
-    flex: 1;
-  }
-
-  .pub-title {
-    font-weight: 600;
-    margin: 0 0 6px 0;
-    color: #222;
-  }
-
-  .pub-ref {
-    margin: 0;
-    color: #666;
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-
-.pub-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  border: 1.5px solid #1a73e8;
-  border-radius: 4px;
-  background: white;
-  color: #1a73e8;
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 600;
-  white-space: nowrap;
-  line-height: 1;
-  transition: all 0.2s ease;
-}
-
-.pub-button:hover {
-  background: #eef5ff;
-  text-decoration: none;
-}
-
-.pub-button-arrow {
-  font-size: 1rem;
-  line-height: 1;
-}
 
   @media (max-width: 700px) {
     .publication {
@@ -371,37 +320,43 @@
   background: #eef5ff;
   text-decoration: none;
 }
-
-.pub-carousel {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: calc((100% - 24px) / 2);
-  gap: 24px;
-  overflow-x: auto;
+.pub-marquee {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
   padding: 4px 4px 12px;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: #c7d2e3 transparent;
 }
 
-.pub-carousel::-webkit-scrollbar {
-  height: 10px;
+.pub-track {
+  --loop-distance: 0px;
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  will-change: transform;
+  animation: pub-marquee-scroll 36s linear infinite;
 }
 
-.pub-carousel::-webkit-scrollbar-track {
-  background: transparent;
+.pub-marquee:hover .pub-track {
+  animation-play-state: paused;
 }
 
-.pub-carousel::-webkit-scrollbar-thumb {
-  background: #c7d2e3;
-  border-radius: 999px;
+.pub-card-shell {
+  flex: 0 0 calc((100% - 48px) / 3);
+}
+
+@keyframes pub-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-1 * var(--loop-distance)));
+  }
 }
 
 .pub-card-link {
   display: block;
   text-decoration: none;
   color: inherit;
-  scroll-snap-align: start;
 }
 
 .pub-card-link:hover {
@@ -411,7 +366,7 @@
 
 .pub-card-vertical {
   height: 100%;
-  min-height: 400px;
+  min-height: 460px;
   background: linear-gradient(to bottom, #ffffff, #fcfdff);
   border: 1px solid #e5eaf3;
   border-radius: 18px;
@@ -429,11 +384,11 @@
 
 .pub-card-image-wrap {
   width: 100%;
-  height: 250px;          /* 이 높이는 네가 고정하고 싶은 이미지 영역 높이 */
+  height: 250px;
   background: white;
   display: flex;
-  align-items: center;    /* 세로 가운데 */
-  justify-content: center;/* 가로 가운데 */
+  align-items: center;
+  justify-content: center;
   padding: 0;
   overflow: hidden;
   border-bottom: 1px solid #eef2f7;
@@ -446,7 +401,7 @@
   margin: 0 auto;
   transform: none;
 }
-    
+
 .pub-card-link:hover .pub-card-image {
   transform: none;
 }
@@ -481,25 +436,21 @@
 }
 
 @media (max-width: 1100px) {
-  .pub-carousel {
-    grid-auto-columns: calc((100% - 24px) / 2);
+  .pub-card-shell {
+    flex: 0 0 calc((100% - 24px) / 2);
   }
 }
 
 @media (max-width: 700px) {
-  .section-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .pub-carousel {
-    grid-auto-columns: 85%;
+  .pub-card-shell {
+    flex: 0 0 85%;
   }
 
   .pub-card-vertical {
     min-height: 420px;
   }
 }
+
   </style>
 </head>
 <body>
@@ -564,58 +515,68 @@
     <h2><a class="section-link" href="publications.html">Selected Publications</a></h2>
     <a class="section-button" href="publications.html">View Full List &gt;</a>
   </div>
+<div class="pub-marquee">
+  <div class="pub-track">
 
-  <div class="pub-carousel">
+    <div class="pub-card-shell">
+      <a class="pub-card-link" href="https://doi.org/10.1002/anie.202420379" target="_blank" rel="noopener noreferrer">
+        <article class="pub-card-vertical">
+          <div class="pub-card-image-wrap">
+            <img src="pub-he-zif.jpg" alt="High-Entropy ZIF publication image" class="pub-card-image">
+          </div>
+          <div class="pub-card-body">
+            <p class="pub-card-title">High-Entropy Zeolitic Imidazolate Frameworks for Dynamic Hydrogen Isotope Separation</p>
+            <p class="pub-card-ref"><em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202420379.</p>
+          </div>
+        </article>
+      </a>
+    </div>
 
-    <a class="pub-card-link" href="https://doi.org/10.26434/chemrxiv-2025-4dtb2" target="_blank" rel="noopener noreferrer">
-      <article class="pub-card-vertical">
-        <div class="pub-card-image-wrap">
-          <img src="pub-fluidic-actuation.jpg" alt="Fluidic actuation publication image" class="pub-card-image">
-        </div>
-        <div class="pub-card-body">
-          <p class="pub-card-title">Fluidic Actuation in a 2D Metal–Organic Framework</p>
-          <p class="pub-card-ref">Nam J. et al. <em>ChemRxiv</em> <strong>2025</strong>, 10.26434/chemrxiv-2025-4dtb2.</p>
-        </div>
-      </article>
-    </a>
-    
-    <a class="pub-card-link" href="https://doi.org/10.1002/anie.202420379" target="_blank" rel="noopener noreferrer">
-      <article class="pub-card-vertical">
-        <div class="pub-card-image-wrap">
-          <img src="pub-he-zif.jpg" alt="High-Entropy ZIF publication image" class="pub-card-image">
-        </div>
-        <div class="pub-card-body">
-          <p class="pub-card-title">High-Entropy Zeolitic Imidazolate Frameworks for Dynamic Hydrogen Isotope Separation</p>
-          <p class="pub-card-ref">Nam J. et al. <em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202420379.</p>
-        </div>
-      </article>
-    </a>
+    <div class="pub-card-shell">
+      <a class="pub-card-link" href="https://doi.org/10.1002/anie.202417137" target="_blank" rel="noopener noreferrer">
+        <article class="pub-card-vertical">
+          <div class="pub-card-image-wrap">
+            <img src="pub-kirigami-zif.jpg" alt="Kirigamic ZIF publication image" class="pub-card-image">
+          </div>
+          <div class="pub-card-body">
+            <p class="pub-card-title">Pore Structure Modulation in Kirigamic Zeolitic Imidazolate Framework</p>
+            <p class="pub-card-ref"><em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202417137.</p>
+          </div>
+        </article>
+      </a>
+    </div>
 
-    <a class="pub-card-link" href="https://doi.org/10.1002/anie.202417137" target="_blank" rel="noopener noreferrer">
-      <article class="pub-card-vertical">
-        <div class="pub-card-image-wrap">
-          <img src="pub-kirigami-zif.jpg" alt="Kirigamic ZIF publication image" class="pub-card-image">
-        </div>
-        <div class="pub-card-body">
-          <p class="pub-card-title">Pore Structure Modulation in Kirigamic Zeolitic Imidazolate Framework</p>
-          <p class="pub-card-ref">Nam J. et al. <em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202417137.</p>
-        </div>
-      </article>
-    </a>
+    <div class="pub-card-shell">
+      <a class="pub-card-link" href="https://doi.org/10.1002/anie.202404061" target="_blank" rel="noopener noreferrer">
+        <article class="pub-card-vertical">
+          <div class="pub-card-image-wrap">
+            <img src="pub-nanomachine-zif.jpg" alt="Nanomachine ZIF publication image" class="pub-card-image">
+          </div>
+          <div class="pub-card-body">
+            <p class="pub-card-title">Zeolitic Imidazolate Frameworks as Solid-State Nanomachines</p>
+            <p class="pub-card-ref"><em>Angew. Chem. Int. Ed.</em> <strong>2024</strong>, <em>63</em>, e202404061.</p>
+          </div>
+        </article>
+      </a>
+    </div>
 
-    <a class="pub-card-link" href="https://doi.org/10.1002/anie.202404061" target="_blank" rel="noopener noreferrer">
-      <article class="pub-card-vertical">
-        <div class="pub-card-image-wrap">
-          <img src="pub-nanomachine-zif.jpg" alt="Nanomachine ZIF publication image" class="pub-card-image">
-        </div>
-        <div class="pub-card-body">
-          <p class="pub-card-title">Zeolitic Imidazolate Frameworks as Solid-State Nanomachines</p>
-          <p class="pub-card-ref">Nam J. et al. <em>Angew. Chem. Int. Ed.</em> <strong>2024</strong>, <em>63</em>, e202404061.</p>
-        </div>
-      </article>
-    </a>
+    <div class="pub-card-shell">
+      <a class="pub-card-link" href="https://doi.org/10.26434/chemrxiv-2025-4dtb2" target="_blank" rel="noopener noreferrer">
+        <article class="pub-card-vertical">
+          <div class="pub-card-image-wrap">
+            <img src="pub-fluidic-actuation.jpg" alt="Fluidic actuation publication image" class="pub-card-image">
+          </div>
+          <div class="pub-card-body">
+            <p class="pub-card-title">Fluidic Actuation in a 2D Metal–Organic Framework</p>
+            <p class="pub-card-ref"><em>ChemRxiv</em> <strong>2025</strong>, 10.26434/chemrxiv-2025-4dtb2.</p>
+          </div>
+        </article>
+      </a>
+    </div>
 
   </div>
+</div>
+
 </div>
 
     <div class="footer">
@@ -623,5 +584,30 @@
     </div>
 
   </div>
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.querySelector('.pub-track');
+  if (!track) return;
+
+  const originalCards = Array.from(track.children);
+
+  originalCards.forEach(card => {
+    const clone = card.cloneNode(true);
+    track.appendChild(clone);
+  });
+
+  const updateLoopDistance = () => {
+    const firstOriginal = track.children[0];
+    const firstClone = track.children[originalCards.length];
+    if (!firstOriginal || !firstClone) return;
+
+    const loopDistance = firstClone.offsetLeft - firstOriginal.offsetLeft;
+    track.style.setProperty('--loop-distance', `${loopDistance}px`);
+  };
+
+  updateLoopDistance();
+  window.addEventListener('resize', updateLoopDistance);
+});
+</script>
 </body>
 </html>
