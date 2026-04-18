@@ -8,8 +8,8 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f7f8fb;
-      color: #222;
+      background: #f4f6fb;
+      color: #1f2937;
       line-height: 1.6;
     }
 
@@ -52,6 +52,7 @@
       text-decoration: none;
       font-size: 1rem;
       font-weight: 600;
+      transition: color 0.2s ease;
     }
 
     .site-nav a:hover,
@@ -60,16 +61,112 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 980px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 40px 20px 60px;
     }
 
-    .card {
+    .page-header {
       background: white;
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 32px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+    }
+
+    .page-header h1 {
+      margin: 0 0 10px 0;
+      font-size: 2.2rem;
+    }
+
+    .page-header p {
+      margin: 0;
+      color: #5b6472;
+      font-size: 1.02rem;
+    }
+
+    .patent-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .patent-item {
+      background: linear-gradient(to right, #ffffff, #fbfcff);
+      border: 1px solid #e3e8f2;
+      border-left: 6px solid #1a73e8;
+      border-radius: 14px;
+      padding: 22px 24px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .patent-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    }
+
+    .patent-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .patent-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: #1a73e8;
+      color: white;
+      font-size: 0.92rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .badge-type {
+      background: #eaf2ff;
+      color: #1a73e8;
+    }
+
+    .badge-date {
+      background: #eef1f6;
+      color: #4b5563;
+    }
+
+    .patent-title {
+      margin: 0 0 10px 0;
+      font-size: 1.16rem;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1.45;
+    }
+
+    .patent-inventors {
+      margin: 0 0 8px 0;
+      color: #374151;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    .patent-id {
+      margin: 0;
+      color: #6b7280;
+      font-size: 0.96rem;
+      line-height: 1.55;
     }
 
     @media (max-width: 700px) {
@@ -85,6 +182,19 @@
 
       .site-logo {
         font-size: 1.4rem;
+      }
+
+      .container {
+        padding: 28px 16px 50px;
+      }
+
+      .page-header,
+      .patent-item {
+        padding: 22px;
+      }
+
+      .page-header h1 {
+        font-size: 1.9rem;
       }
     }
   </style>
@@ -105,9 +215,92 @@
   </header>
 
   <div class="container">
-    <div class="card">
+    <div class="page-header">
       <h1>Patents</h1>
-      <p>This page will present patents and intellectual property related to my research.</p>
+      <p>
+        Patent applications, registrations, and related intellectual property associated with my research.
+      </p>
+    </div>
+
+    <div class="patent-list">
+
+      <div class="patent-item">
+        <div class="patent-meta">
+          <span class="patent-number">07</span>
+          <span class="badge badge-type">PCT Patent Application</span>
+          <span class="badge badge-date">2025/11/14</span>
+        </div>
+        <p class="patent-title">High-entropy zeolitic imidazolate frameworks and isotope separation system utilizing the same</p>
+        <p class="patent-inventors">Choe, W.; Nam, J.; Cho, C.</p>
+        <p class="patent-id">PCT Patent Application Number PCT/KR2025/018854</p>
+      </div>
+
+      <div class="patent-item">
+        <div class="patent-meta">
+          <span class="patent-number">06</span>
+          <span class="badge badge-type">Korea Patent Application</span>
+          <span class="badge badge-date">2025/06/10</span>
+        </div>
+        <p class="patent-title">High-entropy zeolitic imidazolate frameworks and isotope separation system utilizing the same</p>
+        <p class="patent-inventors">Choe, W.; Nam, J.; Cho, C.</p>
+        <p class="patent-id">Korea Patent Application Number 10-2025-0075726</p>
+      </div>
+
+      <div class="patent-item">
+        <div class="patent-meta">
+          <span class="patent-number">05</span>
+          <span class="badge badge-type">PCT Patent Application</span>
+          <span class="badge badge-date">2025/04/04</span>
+        </div>
+        <p class="patent-title">Zeolitic mimic metal-organic framework and method for manufacturing thereof</p>
+        <p class="patent-inventors">Choe, W.; Nam, J.</p>
+        <p class="patent-id">PCT Patent Application Number PCT/KR2025/004577</p>
+      </div>
+
+      <div class="patent-item">
+        <div class="patent-meta">
+          <span class="patent-number">04</span>
+          <span class="badge badge-type">Korea Patent Application</span>
+          <span class="badge badge-date">2024/09/26</span>
+        </div>
+        <p class="patent-title">Zeolitic mimic metal-organic framework and method for manufacturing thereof</p>
+        <p class="patent-inventors">Choe, W.; Nam, J.</p>
+        <p class="patent-id">Korea Patent Application Number 10-2024-0130512</p>
+      </div>
+
+      <div class="patent-item">
+        <div class="patent-meta">
+          <span class="patent-number">03</span>
+          <span class="badge badge-type">Korea Patent Application</span>
+          <span class="badge badge-date">2020/10/06</span>
+        </div>
+        <p class="patent-title">Adsorptive removal of organic dyes on zirconium porphyrinic metal-organic framework</p>
+        <p class="patent-inventors">Choe, W.; Jin, E.; Kim, J.; Nam, J.</p>
+        <p class="patent-id">Korea Patent Application Number 10-2020-0128809</p>
+      </div>
+
+      <div class="patent-item">
+        <div class="patent-meta">
+          <span class="patent-number">02</span>
+          <span class="badge badge-type">Korea Patent Registration</span>
+          <span class="badge badge-date">2020/09/15</span>
+        </div>
+        <p class="patent-title">Crystallized metal-organic chains and methods for their preparation</p>
+        <p class="patent-inventors">Choe, W.; Nam, J.; Lee, S.</p>
+        <p class="patent-id">Korea Patent Registration Number 10-2158076</p>
+      </div>
+
+      <div class="patent-item">
+        <div class="patent-meta">
+          <span class="patent-number">01</span>
+          <span class="badge badge-type">Copyright Registration</span>
+          <span class="badge badge-date">2020/01/23</span>
+        </div>
+        <p class="patent-title">Science of blue</p>
+        <p class="patent-inventors">Choe, W.; Kim, Y.; Nam, J.</p>
+        <p class="patent-id">Korea Copyright Registration Number C-2020-004222</p>
+      </div>
+
     </div>
   </div>
 </body>
