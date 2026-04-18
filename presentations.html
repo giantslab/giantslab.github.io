@@ -8,8 +8,8 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f7f8fb;
-      color: #222;
+      background: #f4f6fb;
+      color: #1f2937;
       line-height: 1.6;
     }
 
@@ -52,6 +52,7 @@
       text-decoration: none;
       font-size: 1rem;
       font-weight: 600;
+      transition: color 0.2s ease;
     }
 
     .site-nav a:hover,
@@ -60,16 +61,115 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 980px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: 40px 20px 60px;
     }
 
-    .card {
+    .page-header {
       background: white;
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 32px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+    }
+
+    .page-header h1 {
+      margin: 0 0 10px 0;
+      font-size: 2.2rem;
+    }
+
+    .page-header p {
+      margin: 0;
+      color: #5b6472;
+      font-size: 1.02rem;
+    }
+
+    .presentation-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .presentation-item {
+      background: linear-gradient(to right, #ffffff, #fbfcff);
+      border: 1px solid #e3e8f2;
+      border-left: 6px solid #1a73e8;
+      border-radius: 14px;
+      padding: 22px 24px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .presentation-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    }
+
+    .presentation-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .presentation-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: #1a73e8;
+      color: white;
+      font-size: 0.92rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .badge-poster {
+      background: #eef3ff;
+      color: #1a73e8;
+    }
+
+    .badge-oral {
+      background: #e9f8ef;
+      color: #1f7a43;
+    }
+
+    .badge-invited {
+      background: #fff3e8;
+      color: #b86418;
+    }
+
+    .badge-date {
+      background: #eef1f6;
+      color: #4b5563;
+    }
+
+    .presentation-title {
+      margin: 0 0 10px 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #111827;
+      line-height: 1.45;
+    }
+
+    .presentation-venue {
+      margin: 0;
+      color: #374151;
+      font-size: 0.99rem;
+      line-height: 1.6;
     }
 
     @media (max-width: 700px) {
@@ -85,6 +185,19 @@
 
       .site-logo {
         font-size: 1.4rem;
+      }
+
+      .container {
+        padding: 28px 16px 50px;
+      }
+
+      .page-header,
+      .presentation-item {
+        padding: 22px;
+      }
+
+      .page-header h1 {
+        font-size: 1.9rem;
       }
     }
   </style>
@@ -105,9 +218,228 @@
   </header>
 
   <div class="container">
-    <div class="card">
+    <div class="page-header">
       <h1>Presentations</h1>
-      <p>This page will present invited talks, conference presentations, posters, and seminars.</p>
+      <p>
+        Conference presentations, seminars, invited talks, and posters related to my research in metal–organic frameworks, reticular chemistry, and dynamic porous solids.
+      </p>
+    </div>
+
+    <div class="presentation-list">
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">21</span>
+          <span class="badge badge-poster">Poster</span>
+          <span class="badge badge-date">2026/05</span>
+        </div>
+        <p class="presentation-title">“Fluidic actuation in a 2D-connected metal–organic framework”</p>
+        <p class="presentation-venue">2026 KSIEC Spring Meeting and Conference</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">20</span>
+          <span class="badge badge-oral">Oral</span>
+          <span class="badge badge-date">2026/04</span>
+        </div>
+        <p class="presentation-title">“Mechanoresponsive Porous Architectures from Metal–Organic Frameworks”</p>
+        <p class="presentation-venue">2026 KIChE Spring Meeting and International Symposium</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">19</span>
+          <span class="badge badge-oral">Oral</span>
+          <span class="badge badge-invited">Invited</span>
+          <span class="badge badge-date">2026/01</span>
+        </div>
+        <p class="presentation-title">“The evolution of materials science: From inorganic chemistry to digital discovery”</p>
+        <p class="presentation-venue">Inorganic Chemistry Special Seminar for the Korean High School Credit System, Hokye High School</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">18</span>
+          <span class="badge badge-oral">Oral</span>
+          <span class="badge badge-invited">Invited</span>
+          <span class="badge badge-date">2026/01</span>
+        </div>
+        <p class="presentation-title">“The evolution of materials science: From inorganic chemistry to digital discovery”</p>
+        <p class="presentation-venue">Inorganic Chemistry Special Seminar for the Korean High School Credit System, Yaksa High School</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">17</span>
+          <span class="badge badge-oral">Oral</span>
+          <span class="badge badge-date">2025/11</span>
+        </div>
+        <p class="presentation-title">“Topology-informed approaches for discovering reticular frameworks”</p>
+        <p class="presentation-venue">Department Seminar in Chair of Inorganic Chemistry I at Technical University of Dresden</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">16</span>
+          <span class="badge badge-poster">Poster</span>
+          <span class="badge badge-date">2025/09</span>
+        </div>
+        <p class="presentation-title">“Structure-informed modulation of zeolitic imidazolate frameworks”</p>
+        <p class="presentation-venue">6th European Conference on Metal–Organic Frameworks and Porous Polymers</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">15</span>
+          <span class="badge badge-poster">Poster</span>
+          <span class="badge badge-date">2025/07</span>
+        </div>
+        <p class="presentation-title">“Guest-triggered actuation in a 2D metal–organic framework”</p>
+        <p class="presentation-venue">2025 KCS Inorganic Chemistry Division Summer Symposium</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">14</span>
+          <span class="badge badge-oral">Oral</span>
+          <span class="badge badge-invited">Invited</span>
+          <span class="badge badge-date">2025/04</span>
+        </div>
+        <p class="presentation-title">“Structure-informed approaches toward sustainable applications of metal–organic frameworks”</p>
+        <p class="presentation-venue">Young Chemist Leaders Forum of Asia-Pacific Economic Cooperation</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">13</span>
+          <span class="badge badge-oral">Oral</span>
+          <span class="badge badge-date">2025/04</span>
+        </div>
+        <p class="presentation-title">“Mechanical actuation of zeolitic imidazolate frameworks”</p>
+        <p class="presentation-venue">135th General Meeting of Korean Chemical Society</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">12</span>
+          <span class="badge badge-oral">Oral</span>
+          <span class="badge badge-date">2025/04</span>
+        </div>
+        <p class="presentation-title">“Molecularly-engineered mechanical metamaterials for adaptive responses to external stimuli”</p>
+        <p class="presentation-venue">2025 Annual Spring Meeting of The Polymer Society of Korea</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">11</span>
+          <span class="badge badge-oral">Oral</span>
+          <span class="badge badge-date">2025/02</span>
+        </div>
+        <p class="presentation-title">“Zeolitic imidazolate frameworks as molecularly-engineered mechanical metamaterials”</p>
+        <p class="presentation-venue">The 2025 Graduate Symposium and Excellent Research Awards</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">10</span>
+          <span class="badge badge-poster">Poster</span>
+          <span class="badge badge-date">2024/04</span>
+        </div>
+        <p class="presentation-title">“Pressure and guest-responsive zeolitic imidazolate framework as kirigamic solid-state material”</p>
+        <p class="presentation-venue">133rd General Meeting of Korean Chemical Society</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">09</span>
+          <span class="badge badge-poster">Poster</span>
+          <span class="badge badge-date">2023/10</span>
+        </div>
+        <p class="presentation-title">“Zr-based porphyrinic metal–organic frameworks as hydrogen storage platforms”</p>
+        <p class="presentation-venue">2023 KIChE Fall Meeting and International Symposium</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">08</span>
+          <span class="badge badge-poster">Poster</span>
+          <span class="badge badge-date">2023/06</span>
+        </div>
+        <p class="presentation-title">“Zeolitic imidazolate frameworks as transformable mechanical nanomachines”</p>
+        <p class="presentation-venue">2023 KCS Inorganic Chemistry Division Summer Symposium</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">07</span>
+          <span class="badge badge-poster">Poster</span>
+          <span class="badge badge-date">2022/09</span>
+        </div>
+        <p class="presentation-title">“Machinery components inside zeolitic imidazolate frameworks”</p>
+        <p class="presentation-venue">8th International Conference on Metal-Organic Frameworks and Open Framework Compounds</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">06</span>
+          <span class="badge badge-poster">Poster</span>
+          <span class="badge badge-date">2022/06</span>
+        </div>
+        <p class="presentation-title">“Hydrogen-bonded solvent network inside a metal–organic framework”</p>
+        <p class="presentation-venue">2022 KCS Inorganic Chemistry Division Summer Symposium</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">05</span>
+          <span class="badge badge-poster">Poster</span>
+          <span class="badge badge-date">2022/04</span>
+        </div>
+        <p class="presentation-title">“Mechanically responsive porphyrinic metal–organic frameworks”</p>
+        <p class="presentation-venue">129th General Meeting of Korean Chemical Society</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">04</span>
+          <span class="badge badge-poster">Poster</span>
+          <span class="badge badge-date">2019/11</span>
+        </div>
+        <p class="presentation-title">“Microporosity of an amorphous core-shell metal–organic framework”</p>
+        <p class="presentation-venue">2019 Korea Crystallographic Association</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">03</span>
+          <span class="badge badge-poster">Poster</span>
+          <span class="badge badge-date">2019/06</span>
+        </div>
+        <p class="presentation-title">“Microporosity of an amorphous core-shell metal–organic framework”</p>
+        <p class="presentation-venue">2019 KCS Inorganic Chemistry Division Summer Symposium</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">02</span>
+          <span class="badge badge-poster">Poster</span>
+          <span class="badge badge-date">2019/04</span>
+        </div>
+        <p class="presentation-title">“Controlling amorphization in metal–organic frameworks”</p>
+        <p class="presentation-venue">123rd General Meeting of Korean Chemical Society</p>
+      </div>
+
+      <div class="presentation-item">
+        <div class="presentation-meta">
+          <span class="presentation-number">01</span>
+          <span class="badge badge-poster">Poster</span>
+          <span class="badge badge-date">2018/10</span>
+        </div>
+        <p class="presentation-title">“Synthesis of new zeolitic imidazolate frameworks using functional imidazoles and structure directing agents”</p>
+        <p class="presentation-venue">122nd General Meeting of Korean Chemical Society</p>
+      </div>
+
     </div>
   </div>
 </body>
