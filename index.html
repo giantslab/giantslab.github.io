@@ -376,7 +376,9 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: calc((100% - 24px) / 2);
-  gap: 24px;
+  grid-template-rows: auto auto auto auto;
+  column-gap: 24px;
+  row-gap: 0;
   overflow-x: auto;
   padding: 4px 4px 12px;
   scroll-snap-type: x mandatory;
@@ -398,7 +400,9 @@
 }
 
 .pub-card-link {
-  display: block;
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: subgrid;
   text-decoration: none;
   color: inherit;
   scroll-snap-align: start;
@@ -410,16 +414,16 @@
 }
 
 .pub-card-vertical {
-  height: 100%;
-  min-height: 400px;
+  grid-row: span 4;
+  display: grid;
+  grid-template-rows: subgrid;
+  row-gap: 0;
   background: linear-gradient(to bottom, #ffffff, #fcfdff);
   border: 1px solid #e5eaf3;
   border-radius: 18px;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   transition: transform 0.22s ease, box-shadow 0.22s ease;
-  display: flex;
-  flex-direction: column;
 }
 
 .pub-card-link:hover .pub-card-vertical {
@@ -452,14 +456,12 @@
 }
 
 .pub-card-body {
-  padding: 18px 18px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: contents;
 }
 
 .pub-card-title {
   margin: 0;
+  padding: 18px 18px 0;
   font-size: 1.03rem;
   font-weight: 700;
   line-height: 1.45;
@@ -467,7 +469,8 @@
   text-decoration: none;
 }
 
-.pub-card-ref {
+.pub-card-authors,
+.pub-card-journal {
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.55;
@@ -475,8 +478,22 @@
   text-decoration: none;
 }
 
+.pub-card-authors {
+  padding: 12px 18px 0;
+}
+
+.pub-card-journal {
+  padding: 6px 18px 20px;
+}
+
+.author-highlight {
+  font-weight: 700;
+  color: #1a73e8;
+}
+
 .pub-card-link:hover .pub-card-title,
-.pub-card-link:hover .pub-card-ref {
+.pub-card-link:hover .pub-card-authors,
+.pub-card-link:hover .pub-card-journal {
   text-decoration: none;
 }
 
@@ -494,10 +511,6 @@
 
   .pub-carousel {
     grid-auto-columns: 85%;
-  }
-
-  .pub-card-vertical {
-    min-height: 420px;
   }
 }
     .site-nav a:hover,
@@ -581,7 +594,8 @@
         </div>
         <div class="pub-card-body">
           <p class="pub-card-title">Realizing a Long-Missing Uniform Tiling in Metal–Organic Frameworks via Node-Linker Matching</p>
-          <p class="pub-card-ref">Lee, H.K.<sup>†</sup>; Nam, J.<sup>†</sup>; Lee, J.H.<sup>†</sup>; Moon, D.<sup>*</sup>; Kim, M.<sup>*</sup>; Choe, W.<sup>*</sup>; Moon, H.R.<sup>*</sup> <em>et al.</em> <em>Submitted</em></p>
+          <p class="pub-card-authors">Lee, H.K.<sup>†</sup>; <span class="author-highlight">Nam, J.<sup>†</sup></span>; Lee, J.H.<sup>†</sup>; Moon, D.<sup>*</sup>; Kim, M.<sup>*</sup>; Choe, W.<sup>*</sup>; Moon, H.R.<sup>*</sup> <em>et al.</em></p>
+          <p class="pub-card-journal"><em>Submitted</em></p>
         </div>
       </article>
     </a>
@@ -593,7 +607,8 @@
         </div>
         <div class="pub-card-body">
           <p class="pub-card-title">Fluidic Actuation in a 2D Metal–Organic Framework</p>
-          <p class="pub-card-ref">Jin, E.<sup>†</sup>; Nam, J.<sup>†</sup>; Kwak, S.K.<sup>*</sup>; Choe, W.<sup>*</sup> <em>et al.</em> <em>ChemRxiv</em> <strong>2025</strong>, 10.26434/chemrxiv-2025-4dtb2.</p>
+          <p class="pub-card-authors">Jin, E.<sup>†</sup>; <span class="author-highlight">Nam, J.<sup>†</sup></span>; Kwak, S.K.<sup>*</sup>; Choe, W.<sup>*</sup> <em>et al.</em></p>
+          <p class="pub-card-journal"><em>ChemRxiv</em> <strong>2025</strong></p>
         </div>
       </article>
     </a>
@@ -605,7 +620,8 @@
         </div>
         <div class="pub-card-body">
           <p class="pub-card-title">High-Entropy Zeolitic Imidazolate Frameworks for Dynamic Hydrogen Isotope Separation</p>
-          <p class="pub-card-ref">Nam, J.; Oh, H.<sup>*</sup>; Choe, W.<sup>*</sup> <em>et al.</em> <em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202420379.</p>
+          <p class="pub-card-authors"><span class="author-highlight">Nam, J.</span>; Oh, H.<sup>*</sup>; Choe, W.<sup>*</sup> <em>et al.</em></p>
+          <p class="pub-card-journal"><em>Angew. Chem. Int. Ed.</em> <strong>2025</strong></p>
         </div>
       </article>
     </a>
@@ -617,7 +633,8 @@
         </div>
         <div class="pub-card-body">
           <p class="pub-card-title">Pore Structure Modulation in Kirigamic Zeolitic Imidazolate Framework</p>
-          <p class="pub-card-ref">Nam, J.; Schneemann, A.<sup>*</sup>; Choe, W.<sup>*</sup> <em>et al.</em> <em>Angew. Chem. Int. Ed.</em> <strong>2025</strong>, <em>64</em>, e202417137.</p>
+          <p class="pub-card-authors"><span class="author-highlight">Nam, J.</span>; Schneemann, A.<sup>*</sup>; Choe, W.<sup>*</sup> <em>et al.</em></p>
+          <p class="pub-card-journal"><em>Angew. Chem. Int. Ed.</em> <strong>2025</strong></p>
         </div>
       </article>
     </a>
@@ -629,7 +646,8 @@
         </div>
         <div class="pub-card-body">
           <p class="pub-card-title">Zeolitic Imidazolate Frameworks as Solid-State Nanomachines</p>
-          <p class="pub-card-ref">Nam, J.; Min, S.K.<sup>*</sup>; Choe, W.<sup>*</sup> <em>et al.</em> <em>Angew. Chem. Int. Ed.</em> <strong>2024</strong>, <em>63</em>, e202404061.</p>
+          <p class="pub-card-authors"><span class="author-highlight">Nam, J.</span>; Min, S.K.<sup>*</sup>; Choe, W.<sup>*</sup> <em>et al.</em></p>
+          <p class="pub-card-journal"><em>Angew. Chem. Int. Ed.</em> <strong>2024</strong></p>
         </div>
       </article>
     </a>
