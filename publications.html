@@ -275,6 +275,51 @@
 .site-nav a.active {
   color: #1a73e8;
 }
+    .pub-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.filter-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border: 1.5px solid #c7d2e3;
+  border-radius: 999px;
+  background: white;
+  color: #4b5563;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-button:hover {
+  background: #eef5ff;
+  border-color: #1a73e8;
+  color: #1a73e8;
+}
+
+.filter-button.active {
+  background: #1a73e8;
+  border-color: #1a73e8;
+  color: white;
+}
+
+.filter-count {
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.pub-item.is-hidden {
+  display: none;
+}
   </style>
 </head>
 <body>
@@ -301,6 +346,12 @@
         A complete list of selected research outputs by Joohan Nam
       </p>
     </div>
+
+<div class="pub-filters" role="group" aria-label="Filter publications by author role">
+  <button type="button" class="filter-button active" data-filter="all" aria-pressed="true">All<span class="filter-count"></span></button>
+  <button type="button" class="filter-button" data-filter="first" aria-pressed="false">First Author<span class="filter-count"></span></button>
+  <button type="button" class="filter-button" data-filter="co" aria-pressed="false">Co-author<span class="filter-count"></span></button>
+</div>
 
 <div class="pub-list">
 
@@ -597,5 +648,45 @@
   
 </div>
   </div>
+
+<script>
+(function () {
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('.filter-button'));
+  var items = Array.prototype.slice.call(document.querySelectorAll('.pub-list .pub-item'));
+
+  function roleOf(item) {
+    if (item.querySelector('.badge-role-first')) return 'first';
+    if (item.querySelector('.badge-role-co')) return 'co';
+    return 'other';
+  }
+
+  function countFor(filter) {
+    if (filter === 'all') return items.length;
+    return items.filter(function (item) { return roleOf(item) === filter; }).length;
+  }
+
+  function apply(filter) {
+    items.forEach(function (item) {
+      var show = (filter === 'all' || roleOf(item) === filter);
+      item.classList.toggle('is-hidden', !show);
+    });
+
+    buttons.forEach(function (button) {
+      var active = (button.getAttribute('data-filter') === filter);
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
+  buttons.forEach(function (button) {
+    var filter = button.getAttribute('data-filter');
+    var label = button.querySelector('.filter-count');
+    if (label) label.textContent = countFor(filter);
+    button.addEventListener('click', function () { apply(filter); });
+  });
+
+  apply('all');
+})();
+</script>
 </body>
 </html>
