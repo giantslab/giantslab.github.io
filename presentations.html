@@ -172,6 +172,52 @@
       line-height: 1.6;
     }
 
+    .pres-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .filter-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      border: 1.5px solid #c7d2e3;
+      border-radius: 999px;
+      background: white;
+      color: #4b5563;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-button:hover {
+      background: #eef5ff;
+      border-color: #1a73e8;
+      color: #1a73e8;
+    }
+
+    .filter-button.active {
+      background: #1a73e8;
+      border-color: #1a73e8;
+      color: white;
+    }
+
+    .filter-count {
+      font-size: 0.85rem;
+      font-weight: 600;
+      opacity: 0.75;
+    }
+
+    .presentation-item.is-hidden {
+      display: none;
+    }
+
     @media (max-width: 700px) {
       .header-inner {
         flex-direction: column;
@@ -226,6 +272,12 @@
       </p>
     </div>
 
+    <div class="pres-filters" role="group" aria-label="Filter presentations by type">
+      <button type="button" class="filter-button active" data-filter="all" aria-pressed="true">All<span class="filter-count"></span></button>
+      <button type="button" class="filter-button" data-filter="oral" aria-pressed="false">Oral<span class="filter-count"></span></button>
+      <button type="button" class="filter-button" data-filter="poster" aria-pressed="false">Poster<span class="filter-count"></span></button>
+    </div>
+
     <div class="presentation-list">
       
       <div class="presentation-item">
@@ -241,7 +293,7 @@
       <div class="presentation-item">
         <div class="presentation-meta">
           <span class="presentation-number">20</span>
-          <span class="badge badge-poster">Oral</span>
+          <span class="badge badge-oral">Oral</span>
           <span class="badge badge-date">2026/06</span>
         </div>
         <p class="presentation-title">Topology-encoded motions in metal–organic frameworks</p>
@@ -441,5 +493,44 @@
 
     </div>
   </div>
+<script>
+(function () {
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('.filter-button'));
+  var items = Array.prototype.slice.call(document.querySelectorAll('.presentation-list .presentation-item'));
+
+  function typeOf(item) {
+    if (item.querySelector('.badge-oral')) return 'oral';
+    if (item.querySelector('.badge-poster')) return 'poster';
+    return 'other';
+  }
+
+  function countFor(filter) {
+    if (filter === 'all') return items.length;
+    return items.filter(function (item) { return typeOf(item) === filter; }).length;
+  }
+
+  function apply(filter) {
+    items.forEach(function (item) {
+      var show = (filter === 'all' || typeOf(item) === filter);
+      item.classList.toggle('is-hidden', !show);
+    });
+
+    buttons.forEach(function (button) {
+      var active = (button.getAttribute('data-filter') === filter);
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
+  buttons.forEach(function (button) {
+    var filter = button.getAttribute('data-filter');
+    var label = button.querySelector('.filter-count');
+    if (label) label.textContent = countFor(filter);
+    button.addEventListener('click', function () { apply(filter); });
+  });
+
+  apply('all');
+})();
+</script>
 </body>
 </html>
