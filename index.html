@@ -497,6 +497,77 @@
   text-decoration: none;
 }
 
+.pub-carousel-wrap {
+  position: relative;
+}
+
+.pub-carousel-wrap .pub-carousel {
+  scrollbar-width: none;
+}
+
+.pub-carousel-wrap .pub-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.pub-nav {
+  position: absolute;
+  top: 125px;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e5eaf3;
+  border-radius: 50%;
+  background: white;
+  color: #1a73e8;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.10);
+  transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.pub-nav:hover {
+  background: #eef5ff;
+}
+
+.pub-nav-prev {
+  left: -20px;
+}
+
+.pub-nav-next {
+  right: -20px;
+}
+
+.pub-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.pub-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: #c7d2e3;
+  cursor: pointer;
+  transition: width 0.25s ease, background 0.25s ease;
+}
+
+.pub-dot.active {
+  width: 22px;
+  background: #1a73e8;
+}
+
+@media (max-width: 700px) {
+  .pub-nav {
+    display: none;
+  }
+}
+
 @media (max-width: 1100px) {
   .pub-carousel {
     grid-auto-columns: calc((100% - 24px) / 2);
@@ -577,6 +648,9 @@
     <a class="section-button" href="publications.html">View Full List &gt;</a>
   </div>
 
+  <div class="pub-carousel-wrap">
+  <button class="pub-nav pub-nav-prev" type="button" aria-label="Previous publication">&#8249;</button>
+  <button class="pub-nav pub-nav-next" type="button" aria-label="Next publication">&#8250;</button>
   <div class="pub-carousel">
 
      
@@ -646,7 +720,111 @@
     </a>
 
   </div>
+  <div class="pub-dots" aria-label="Publication slides"></div>
+  </div>
 </div>
+
+<script>
+(function () {
+  var wrap = document.querySelector('.pub-carousel-wrap');
+  if (!wrap) return;
+  var track = wrap.querySelector('.pub-carousel');
+  var dotsBox = wrap.querySelector('.pub-dots');
+  var INTERVAL = 5000;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var timer = null;
+  var paused = false;
+
+  function step() {
+    var card = track.querySelector('.pub-card-link');
+    var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+    return card ? card.getBoundingClientRect().width + gap : track.clientWidth;
+  }
+
+  function pageCount() {
+    var max = track.scrollWidth - track.clientWidth;
+    return max > 2 ? Math.round(max / step()) + 1 : 1;
+  }
+
+  function current() {
+    return Math.round(track.scrollLeft / step());
+  }
+
+  function goTo(i) {
+    var n = pageCount();
+    i = ((i % n) + n) % n;
+    track.scrollTo({ left: i * step(), behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+
+  function buildDots() {
+    var n = pageCount();
+    dotsBox.innerHTML = '';
+    for (var i = 0; i < n; i++) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pub-dot';
+      b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      b.addEventListener('click', (function (k) { return function () { goTo(k); restart(); }; })(i));
+      dotsBox.appendChild(b);
+    }
+    dotsBox.style.display = n > 1 ? '' : 'none';
+    wrap.querySelectorAll('.pub-nav').forEach(function (btn) { btn.style.display = n > 1 ? '' : 'none'; });
+    markDot();
+  }
+
+  function markDot() {
+    var c = current();
+    Array.prototype.forEach.call(dotsBox.children, function (d, i) {
+      d.classList.toggle('active', i === c);
+    });
+  }
+
+  function start() {
+    if (reduceMotion || timer || paused || pageCount() < 2) return;
+    timer = setInterval(function () { goTo(current() + 1); }, INTERVAL);
+  }
+
+  function stop() {
+    clearInterval(timer);
+    timer = null;
+  }
+
+  function restart() {
+    stop();
+    start();
+  }
+
+  wrap.querySelector('.pub-nav-prev').addEventListener('click', function () { goTo(current() - 1); restart(); });
+  wrap.querySelector('.pub-nav-next').addEventListener('click', function () { goTo(current() + 1); restart(); });
+
+  wrap.addEventListener('mouseenter', function () { paused = true; stop(); });
+  wrap.addEventListener('mouseleave', function () { paused = false; start(); });
+  wrap.addEventListener('focusin', function () { paused = true; stop(); });
+  wrap.addEventListener('focusout', function () { paused = false; start(); });
+  track.addEventListener('touchstart', function () { paused = true; stop(); }, { passive: true });
+  track.addEventListener('touchend', function () { paused = false; setTimeout(start, INTERVAL); }, { passive: true });
+
+  var scrollTick;
+  track.addEventListener('scroll', function () {
+    clearTimeout(scrollTick);
+    scrollTick = setTimeout(markDot, 80);
+  }, { passive: true });
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop(); else start();
+  });
+
+  var resizeTick;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTick);
+    resizeTick = setTimeout(buildDots, 150);
+  });
+
+  window.addEventListener('load', buildDots);
+  buildDots();
+  start();
+})();
+</script>
 
     <div class="footer">
       © 2026 Joohan Nam
