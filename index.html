@@ -503,6 +503,7 @@
 
 .pub-carousel-wrap .pub-carousel {
   scrollbar-width: none;
+  scroll-snap-type: none;
 }
 
 .pub-carousel-wrap .pub-carousel::-webkit-scrollbar {
@@ -537,29 +538,6 @@
 
 .pub-nav-next {
   right: -20px;
-}
-
-.pub-dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.pub-dot {
-  width: 8px;
-  height: 8px;
-  padding: 0;
-  border: none;
-  border-radius: 999px;
-  background: #c7d2e3;
-  cursor: pointer;
-  transition: width 0.25s ease, background 0.25s ease;
-}
-
-.pub-dot.active {
-  width: 22px;
-  background: #1a73e8;
 }
 
 @media (max-width: 700px) {
@@ -720,7 +698,6 @@
     </a>
 
   </div>
-  <div class="pub-dots" aria-label="Publication slides"></div>
   </div>
 </div>
 
@@ -729,100 +706,81 @@
   var wrap = document.querySelector('.pub-carousel-wrap');
   if (!wrap) return;
   var track = wrap.querySelector('.pub-carousel');
-  var dotsBox = wrap.querySelector('.pub-dots');
-  var INTERVAL = 5000;
+  var SPEED = 30; // px per second
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var timer = null;
-  var paused = false;
+  var cards = Array.prototype.slice.call(track.querySelectorAll('.pub-card-link'));
+  if (cards.length < 2) return;
+
+  // Append one copy of every card so the strip can loop without a visible seam.
+  cards.forEach(function (card) {
+    var clone = card.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    clone.setAttribute('tabindex', '-1');
+    track.appendChild(clone);
+  });
+  var firstClone = track.children[cards.length];
+
+  var pos = 0;
+  var last = null;
+  var hold = false;      // hover, focus or touch
+  var busyUntil = 0;     // arrow animation in progress
+
+  function loopWidth() {
+    return firstClone.offsetLeft - cards[0].offsetLeft;
+  }
 
   function step() {
-    var card = track.querySelector('.pub-card-link');
     var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
-    return card ? card.getBoundingClientRect().width + gap : track.clientWidth;
+    return cards[0].getBoundingClientRect().width + gap;
   }
 
-  function pageCount() {
-    var max = track.scrollWidth - track.clientWidth;
-    return max > 2 ? Math.round(max / step()) + 1 : 1;
+  function wrapPos() {
+    var w = loopWidth();
+    if (w <= 0) return;
+    while (pos >= w) pos -= w;
+    while (pos < 0) pos += w;
   }
 
-  function current() {
-    return Math.round(track.scrollLeft / step());
-  }
-
-  function goTo(i) {
-    var n = pageCount();
-    i = ((i % n) + n) % n;
-    track.scrollTo({ left: i * step(), behavior: reduceMotion ? 'auto' : 'smooth' });
-  }
-
-  function buildDots() {
-    var n = pageCount();
-    dotsBox.innerHTML = '';
-    for (var i = 0; i < n; i++) {
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'pub-dot';
-      b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-      b.addEventListener('click', (function (k) { return function () { goTo(k); restart(); }; })(i));
-      dotsBox.appendChild(b);
+  function frame(t) {
+    if (last !== null && !hold && !reduceMotion && !document.hidden && t > busyUntil) {
+      pos += SPEED * Math.min(t - last, 100) / 1000;
+      wrapPos();
+      track.scrollLeft = pos;
     }
-    dotsBox.style.display = n > 1 ? '' : 'none';
-    wrap.querySelectorAll('.pub-nav').forEach(function (btn) { btn.style.display = n > 1 ? '' : 'none'; });
-    markDot();
+    last = t;
+    requestAnimationFrame(frame);
   }
 
-  function markDot() {
-    var c = current();
-    Array.prototype.forEach.call(dotsBox.children, function (d, i) {
-      d.classList.toggle('active', i === c);
-    });
-  }
-
-  function start() {
-    if (reduceMotion || timer || paused || pageCount() < 2) return;
-    timer = setInterval(function () { goTo(current() + 1); }, INTERVAL);
-  }
-
-  function stop() {
-    clearInterval(timer);
-    timer = null;
-  }
-
-  function restart() {
-    stop();
-    start();
-  }
-
-  wrap.querySelector('.pub-nav-prev').addEventListener('click', function () { goTo(current() - 1); restart(); });
-  wrap.querySelector('.pub-nav-next').addEventListener('click', function () { goTo(current() + 1); restart(); });
-
-  wrap.addEventListener('mouseenter', function () { paused = true; stop(); });
-  wrap.addEventListener('mouseleave', function () { paused = false; start(); });
-  wrap.addEventListener('focusin', function () { paused = true; stop(); });
-  wrap.addEventListener('focusout', function () { paused = false; start(); });
-  track.addEventListener('touchstart', function () { paused = true; stop(); }, { passive: true });
-  track.addEventListener('touchend', function () { paused = false; setTimeout(start, INTERVAL); }, { passive: true });
-
-  var scrollTick;
+  // Follow manual swipes / trackpad scrolling.
   track.addEventListener('scroll', function () {
-    clearTimeout(scrollTick);
-    scrollTick = setTimeout(markDot, 80);
+    if (Math.abs(track.scrollLeft - pos) > 2) {
+      pos = track.scrollLeft;
+      if (pos >= loopWidth() && performance.now() > busyUntil) { wrapPos(); track.scrollLeft = pos; }
+    }
   }, { passive: true });
 
-  document.addEventListener('visibilitychange', function () {
-    if (document.hidden) stop(); else start();
-  });
+  function nudge(dir) {
+    pos = track.scrollLeft;
+    if (dir < 0 && pos < step()) { pos += loopWidth(); track.scrollLeft = pos; }
+    pos += dir * step();
+    busyUntil = performance.now() + 700;
+    track.scrollTo({ left: pos, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
 
-  var resizeTick;
-  window.addEventListener('resize', function () {
-    clearTimeout(resizeTick);
-    resizeTick = setTimeout(buildDots, 150);
-  });
+  wrap.querySelector('.pub-nav-prev').addEventListener('click', function () { nudge(-1); });
+  wrap.querySelector('.pub-nav-next').addEventListener('click', function () { nudge(1); });
 
-  window.addEventListener('load', buildDots);
-  buildDots();
-  start();
+  wrap.addEventListener('mouseenter', function () { hold = true; });
+  wrap.addEventListener('mouseleave', function () { hold = false; });
+  wrap.addEventListener('focusin', function () { hold = true; });
+  wrap.addEventListener('focusout', function () { hold = false; });
+  var touchTimer;
+  track.addEventListener('touchstart', function () { clearTimeout(touchTimer); hold = true; }, { passive: true });
+  track.addEventListener('touchend', function () {
+    touchTimer = setTimeout(function () { pos = track.scrollLeft; hold = false; }, 2500);
+  }, { passive: true });
+
+  requestAnimationFrame(frame);
 })();
 </script>
 
