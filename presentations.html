@@ -283,6 +283,7 @@
       <div class="presentation-item">
         <div class="presentation-meta">
           <span class="presentation-number">21</span>
+          <span class="badge badge-oral">Oral</span>
           <span class="badge badge-poster">Poster</span>
           <span class="badge badge-date">2026/11</span>
         </div>
@@ -498,20 +499,18 @@
   var buttons = Array.prototype.slice.call(document.querySelectorAll('.filter-button'));
   var items = Array.prototype.slice.call(document.querySelectorAll('.presentation-list .presentation-item'));
 
-  function typeOf(item) {
-    if (item.querySelector('.badge-oral')) return 'oral';
-    if (item.querySelector('.badge-poster')) return 'poster';
-    return 'other';
+  // An entry can carry both badges (e.g. flash talk + poster) and then counts for both.
+  function matches(item, filter) {
+    return filter === 'all' || !!item.querySelector('.badge-' + filter);
   }
 
   function countFor(filter) {
-    if (filter === 'all') return items.length;
-    return items.filter(function (item) { return typeOf(item) === filter; }).length;
+    return items.filter(function (item) { return matches(item, filter); }).length;
   }
 
   function apply(filter) {
     items.forEach(function (item) {
-      var show = (filter === 'all' || typeOf(item) === filter);
+      var show = matches(item, filter);
       item.classList.toggle('is-hidden', !show);
     });
 
