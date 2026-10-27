@@ -197,6 +197,11 @@
   background: #fff3e8;
   color: #b86418;
 }
+
+.badge-role-corr {
+  background: #f3edff;
+  color: #6d3fc0;
+}
     .author-highlight {
   font-weight: 700;
   color: #1a73e8;
@@ -350,6 +355,7 @@
 <div class="pub-filters" role="group" aria-label="Filter publications by author role">
   <button type="button" class="filter-button active" data-filter="all" aria-pressed="true">All<span class="filter-count"></span></button>
   <button type="button" class="filter-button" data-filter="first" aria-pressed="false">First author<span class="filter-count"></span></button>
+  <button type="button" class="filter-button" data-filter="corr" aria-pressed="false">Corresponding<span class="filter-count"></span></button>
   <button type="button" class="filter-button" data-filter="co" aria-pressed="false">Co-author<span class="filter-count"></span></button>
 </div>
 
@@ -397,9 +403,10 @@
       <span class="badge badge-journal">Submitted</span>
       <span class="badge badge-year">2026</span>
       <span class="badge badge-role-first">First author</span>
+      <span class="badge badge-role-corr">Corresponding</span>
     </div>
     <p class="pub-title">Antisymmetric thermopower without magnetism in three-phase composites</p>
-    <p class="pub-authors"><span class="author-highlight">Nam, J.</span>;</p>
+    <p class="pub-authors"><span class="author-highlight">Nam, J.</span><sup>*</sup>;</p>
     <p class="pub-citation"><em>Manuscript submitted</em></p>
   </div>
 
@@ -409,9 +416,10 @@
       <span class="badge badge-journal">Submitted</span>
       <span class="badge badge-year">2026</span>
       <span class="badge badge-role-first">First author</span>
+      <span class="badge badge-role-corr">Corresponding</span>
     </div>
     <p class="pub-title">Mechanical meta-ZIFs on the rise</p>
-    <p class="pub-authors"><span class="author-highlight">Nam, J.</span>;</p>
+    <p class="pub-authors"><span class="author-highlight">Nam, J.</span><sup>*</sup>;</p>
     <p class="pub-citation"><em>Manuscript submitted</em></p>
   </div>
 
@@ -714,20 +722,18 @@
   var buttons = Array.prototype.slice.call(document.querySelectorAll('.filter-button'));
   var items = Array.prototype.slice.call(document.querySelectorAll('.pub-list .pub-item'));
 
-  function roleOf(item) {
-    if (item.querySelector('.badge-role-first')) return 'first';
-    if (item.querySelector('.badge-role-co')) return 'co';
-    return 'other';
+  function hasRole(item, filter) {
+    return !!item.querySelector('.badge-role-' + filter);
   }
 
   function countFor(filter) {
     if (filter === 'all') return items.length;
-    return items.filter(function (item) { return roleOf(item) === filter; }).length;
+    return items.filter(function (item) { return hasRole(item, filter); }).length;
   }
 
   function apply(filter) {
     items.forEach(function (item) {
-      var show = (filter === 'all' || roleOf(item) === filter);
+      var show = (filter === 'all' || hasRole(item, filter));
       item.classList.toggle('is-hidden', !show);
     });
 
